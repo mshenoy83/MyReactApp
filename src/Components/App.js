@@ -1,28 +1,33 @@
-import React, { Component } from "react";
-import { FlutterAppBar, Footer } from "./Layouts";
+import React from "react";
+import { MyAppBar, Footer } from "./Layouts";
 import SignIn from "./Forms/SignIn";
 
 class App extends React.Component {
   constructor() {
     super();
     this.handleLogin = this.handleLogin.bind(this);
+    this.CloseLogin = this.CloseLogin.bind(this);
   }
   state = {
-    open: false
+    open: false,
+    email: "",
+    password: ""
   };
   handleLogin() {
-    console.log(this.state.open);
     if (!this.state.open) {
       this.setState({ open: true });
     }
-    console.log(this.state.open);
+  }
+
+  CloseLogin() {
+    this.setState({ open: false });
   }
   render() {
     return (
       <React.Fragment>
-        <FlutterAppBar OpenDialog={this.handleLogin} />
-        <SignIn IsOpen={this.state.open} />
-        <div>Hello from React</div>;
+        <MyAppBar OpenDialog={this.handleLogin} />
+        <SignIn IsOpen={this.state.open} handleClose={this.CloseLogin} />
+        <div>Hello from React</div>
         <Footer />
       </React.Fragment>
     );

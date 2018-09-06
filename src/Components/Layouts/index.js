@@ -1,4 +1,4 @@
-import FlutterAppBar from "./Header";
+import MyAppBar from "./Header";
 import Footer from "./Footer";
 
-export { FlutterAppBar, Footer };
+export { MyAppBar, Footer };

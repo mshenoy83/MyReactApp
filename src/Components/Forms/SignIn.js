@@ -1,75 +1,50 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControl from "@material-ui/core/FormControl";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import Avatar from "@material-ui/core/Avatar";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
+import {
+  Button,
+  CssBaseline,
+  FormControl,
+  Input,
+  InputLabel,
+  Avatar,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Typography,
+  IconButton
+} from "@material-ui/core";
 import LockIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
-import Paper from "@material-ui/core/Paper";
+import { basestyles } from "../Styles/base";
 
-const styles = theme => ({
-  layout: {
-    width: "auto",
-    display: "block", // Fix IE11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
-  },
-  paper: {
-    marginTop: theme.spacing.unit,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-      .spacing.unit * 3}px`
-  },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE11 issue.
-    marginTop: theme.spacing.unit
-  },
-  submit: {
-    marginTop: theme.spacing.unit * 3
-  }
-});
-
-@withStyles(styles)
+@withStyles(basestyles)
 export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
+    this.setState({ open: this.props.IsOpen });
   }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   render() {
     return (
       <React.Fragment>
         <Dialog
           open={this.props.IsOpen}
-          onClose={this.handleClose}
+          className={this.props.classes.signInDialog}
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
+            <div className={this.props.classes.iconWrapper}>
+              <IconButton
+                color="primary"
+                onClick={this.props.handleClose}
+                aria-label="Close"
+                className={this.props.classes.iconbutton}
+              >
+                <CloseIcon color="primary" />
+              </IconButton>
+            </div>
             <main className={this.props.classes.paper}>
+              <CssBaseline />
               <Avatar className={this.props.classes.avatar}>
                 <LockIcon />
               </Avatar>
@@ -103,6 +78,9 @@ export default class SignIn extends React.Component {
                   Sign in
                 </Button>
               </form>
+              <Button color="primary" className={this.props.classes.button}>
+                Forgot Password?
+              </Button>
             </main>
           </DialogContent>
         </Dialog>
