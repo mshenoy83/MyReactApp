@@ -1,8 +1,6 @@
 import React from "react";
 import { MyAppBar, Footer } from "./Layouts";
 import SignIn from "./Dialogs/SignIn";
-import BlockUi from "react-block-ui";
-import "react-block-ui/style.css";
 
 class App extends React.Component {
   constructor() {
@@ -23,7 +21,6 @@ class App extends React.Component {
   }
 
   Login(model) {
-    this.toggleBlocking();
     fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
       body: JSON.stringify({
@@ -38,7 +35,6 @@ class App extends React.Component {
       .then(response => response.json())
       .then(json => {
         console.log(json);
-        this.toggleBlocking();
         this.CloseLogin();
       });
   }
@@ -55,16 +51,14 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <BlockUi tag="div" blocking={this.state.blocking}>
-          <MyAppBar OpenDialog={this.openLogin} />
-          <SignIn
-            IsOpen={this.state.open}
-            handleClose={this.CloseLogin}
-            OnSubmit={this.Login}
-            Email={this.state.email}
-            Password={this.state.password}
-          />
-        </BlockUi>
+        <MyAppBar OpenDialog={this.openLogin} />
+        <SignIn
+          IsOpen={this.state.open}
+          handleClose={this.CloseLogin}
+          OnSubmit={this.Login}
+          Email={this.state.email}
+          Password={this.state.password}
+        />
       </React.Fragment>
     );
   }
