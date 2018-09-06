@@ -1,6 +1,6 @@
 import React from "react";
 import { MyAppBar, Footer } from "./Layouts";
-import SignIn from "./Forms/SignIn";
+import SignIn from "./Dialogs/SignIn";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 

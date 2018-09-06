@@ -9,11 +9,6 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.setState({ open: this.props.IsOpen });
-    this.disableButton = this.disableButton.bind(this);
-    this.enableButton = this.enableButton.bind(this);
-    this.submitForm = this.submitForm.bind(this);
-    this.updateEmail = this.updateEmail.bind(this);
-    this.updatePassword = this.updatePassword.bind(this);
   }
   state = {
     open: false
@@ -37,8 +32,8 @@ class SignIn extends React.Component {
               >
                 <CloseIcon color="primary" />
               </IconButton>
-              <Login OnSubmit={this.props.OnSubmit} />
             </div>
+            <Login OnSubmit={this.props.OnSubmit} />
           </DialogContent>
         </Dialog>
       </React.Fragment>
