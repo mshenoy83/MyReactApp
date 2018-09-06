@@ -6,7 +6,6 @@ import InputFormValidator from "../Validators/InputFormValidator";
 import LockIcon from "@material-ui/icons/LockOutlined";
 import {
   Button,
-  CssBaseline,
   FormControl,
   Input,
   InputLabel,
@@ -56,52 +55,46 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <main className={this.props.classes.paper}>
-          <CssBaseline />
-          <Avatar className={this.props.classes.avatar}>
-            <LockIcon />
-          </Avatar>
-          <Typography variant="headline">Sign in</Typography>
-          <Formsy
-            onValid={this.enableButton}
-            onInvalid={this.disableButton}
-            onValidSubmit={this.submitForm}
-          >
-            <InputFormValidator
-              name="email"
-              id="email"
-              autoComplete="email"
-              LabelText="Email Address"
-              validations="isEmail"
-              validationError="This is not a valid email"
-              required
-              setEmail={this.updateEmail}
+        <Avatar className={this.props.classes.avatar}>
+          <LockIcon />
+        </Avatar>
+        <Typography variant="headline">Log in</Typography>
+        <Formsy
+          onValid={this.enableButton}
+          onInvalid={this.disableButton}
+          onValidSubmit={this.submitForm}
+        >
+          <InputFormValidator
+            name="email"
+            id="email"
+            autoComplete="email"
+            LabelText="Email Address"
+            validations="isEmail"
+            validationError="This is not a valid email"
+            required
+            setEmail={this.updateEmail}
+          />
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input
+              name="password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={this.updatePassword}
             />
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={this.updatePassword}
-              />
-            </FormControl>
-            <Button
-              type="submit"
-              fullWidth
-              variant="raised"
-              color="primary"
-              disabled={!this.state.canSubmit}
-              className={this.props.classes.submit}
-            >
-              Sign in
-            </Button>
-          </Formsy>
-          <Button color="primary" className={this.props.classes.button}>
-            Forgot Password?
+          </FormControl>
+          <Button
+            type="submit"
+            fullWidth
+            variant="raised"
+            color="primary"
+            disabled={!this.state.canSubmit}
+            className={this.props.classes.submit}
+          >
+            Sign in
           </Button>
-        </main>
+        </Formsy>
       </React.Fragment>
     );
   }

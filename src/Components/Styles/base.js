@@ -1,3 +1,5 @@
+import { white } from "@material-ui/core/colors";
+
 export const basestyles = theme => ({
   layout: {
     width: "auto",
@@ -47,5 +49,21 @@ export const basestyles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  dialogFooter: {
+    padding: "10px 20px",
+    backgroundColor: "#f2f2f2",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "inline-flex"
+  },
+  whitebutton: {
+    backgroundColor: "#ffffff",
+    "&:hover": {
+      backgroundColor: "rgba(78, 203, 244, 0.2)"
+    }
+  },
+  spacedText: {
+    marginRight: "5px"
   }
 });
