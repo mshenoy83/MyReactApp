@@ -8,12 +8,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountIcon from "@material-ui/icons/AccountBoxOutlined";
 import { basestyles } from "../Styles/base";
 
-@withStyles(basestyles)
 class MyAppBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className={this.props.classes.root}>
@@ -47,4 +42,4 @@ class MyAppBar extends React.Component {
   }
 }
 
-export default MyAppBar;
+export default withStyles(basestyles)(MyAppBar);
