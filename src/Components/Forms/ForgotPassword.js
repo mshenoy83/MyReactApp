@@ -6,6 +6,20 @@ import { basestyles } from "../Styles/base";
 import Formsy from "formsy-react";
 
 class ForgotPassword extends React.Component {
+  constructor() {
+    super();
+    this.updateEmail = this.updateEmail.bind(this);
+  }
+
+  state = {
+    email: ""
+  };
+
+  updateEmail(newValue) {
+    this.setState({
+      email: newValue
+    });
+  }
   render() {
     return (
       <React.Fragment>
