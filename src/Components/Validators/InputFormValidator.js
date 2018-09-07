@@ -20,7 +20,7 @@ class InputFormValidator extends React.Component {
     // An error message is returned only if the component is invalid
     const errorMessage = this.props.getErrorMessage();
     return (
-      <div>
+      <React.Fragment>
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor={name}>{LabelText}</InputLabel>
           <Input
@@ -32,7 +32,7 @@ class InputFormValidator extends React.Component {
           />
         </FormControl>
         <div style={{ color: "red" }}>{errorMessage}</div>
-      </div>
+      </React.Fragment>
     );
   }
 }

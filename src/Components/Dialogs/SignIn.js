@@ -5,12 +5,11 @@ import {
   DialogContent,
   IconButton,
   CssBaseline,
-  Button,
-  Typography
+  Button
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { basestyles } from "../Styles/base";
-import { Login, Register } from "../Forms";
+import { Login, Register, ForgotPassword } from "../Forms";
 import SignInFooter from "../Layouts/SignInFooter";
 
 const TextData = {
@@ -46,6 +45,16 @@ class SignIn extends React.Component {
         FooterLabelText: TextData.RegisterFooterLabel,
         FooterButtonText: TextData.LoginButtonLabel
       });
+      return;
+    }
+    if (this.state.showRegistration) {
+      this.setState({
+        showLogin: true,
+        showRegistration: false,
+        FooterLabelText: TextData.SignUpFooterLabel,
+        FooterButtonText: TextData.SignUpButtonLabel
+      });
+      return;
     }
   }
 
