@@ -27,9 +27,10 @@ class SignIn extends React.Component {
     });
     this.FooterButtonClick = this.FooterButtonClick.bind(this);
     this.CloseDialog = this.CloseDialog.bind(this);
+    this.ForgotPasswordClick = this.ForgotPasswordClick.bind(this);
+    this.BacktoLogin = this.BacktoLogin.bind(this);
   }
   state = {
-    open: false,
     showLogin: true,
     showRegistration: false,
     showForgotPassword: false,
@@ -58,9 +59,24 @@ class SignIn extends React.Component {
     }
   }
 
+  ForgotPasswordClick() {
+    this.setState({
+      showLogin: false,
+      showRegistration: false,
+      showForgotPassword: true
+    });
+  }
+
+  BacktoLogin() {
+    this.setState({
+      showLogin: true,
+      showRegistration: false,
+      showForgotPassword: false
+    });
+  }
+
   CloseDialog() {
     this.setState({
-      open: false,
       showLogin: true,
       showRegistration: false,
       showForgotPassword: false,
@@ -94,12 +110,19 @@ class SignIn extends React.Component {
               {this.state.showLogin ? (
                 <React.Fragment>
                   <Login OnSubmit={this.props.OnSubmit} />
-                  <Button color="primary" className={this.props.classes.button}>
+                  <Button
+                    color="primary"
+                    className={this.props.classes.button}
+                    onClick={this.ForgotPasswordClick}
+                  >
                     Forgot Password?
                   </Button>
                 </React.Fragment>
               ) : null}
               {this.state.showRegistration ? <Register /> : null}
+              {this.state.showForgotPassword ? (
+                <ForgotPassword BacktoLogin={this.BacktoLogin} />
+              ) : null}
             </main>
           </DialogContent>
           {!this.state.showForgotPassword ? (

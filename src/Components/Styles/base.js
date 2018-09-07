@@ -64,10 +64,32 @@ export const basestyles = theme => ({
     }
   },
   spacedText: {
-    marginRight: "5px"
+    marginRight: theme.spacing.unit
   },
   dateField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
+  },
+  halfWidth: {
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "100%"
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "48%"
+    }
+  },
+  spaceRight: {
+    [theme.breakpoints.down("sm")]: {
+      marginRight: "0px"
+    },
+    [theme.breakpoints.up("md")]: {
+      marginRight: "0px"
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginRight: theme.spacing.unit
+    }
   }
 });

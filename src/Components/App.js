@@ -8,7 +8,6 @@ class App extends React.Component {
     this.openLogin = this.openLogin.bind(this);
     this.CloseLogin = this.CloseLogin.bind(this);
     this.Login = this.Login.bind(this);
-    this.toggleBlocking = this.toggleBlocking.bind(this);
   }
   state = {
     open: false,
@@ -16,9 +15,6 @@ class App extends React.Component {
     password: "",
     blocking: false
   };
-  toggleBlocking() {
-    this.setState({ blocking: !this.state.blocking });
-  }
 
   Login(model) {
     fetch("https://jsonplaceholder.typicode.com/posts", {
