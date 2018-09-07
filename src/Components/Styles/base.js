@@ -65,5 +65,9 @@ export const basestyles = theme => ({
   },
   spacedText: {
     marginRight: "5px"
+  },
+  dateField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   }
 });
