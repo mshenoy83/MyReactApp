@@ -43,7 +43,13 @@ class Register extends React.Component {
     });
   };
 
-  IsUserOlderThan18 = () => {};
+  updatePhoneNumber = newValue => {
+    this.setState({ PhoneNumber: newValue });
+  };
+
+  OnBirthDateChange = value => {
+    this.setState({ DateOfBirth: value });
+  };
 
   render = () => {
     var Data = States,
@@ -94,6 +100,17 @@ class Register extends React.Component {
                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                 <Input name="lastname" id="lastname" />
               </FormControl>
+              <InputFormValidator
+                name="mobilenumber"
+                id="mobilenumber"
+                autoComplete="mobilenumber"
+                LabelText="Mobile Number"
+                validations="IsValidPhoneNumber"
+                validationError="This is not a valid mobile number"
+                required
+                setEmail={this.updatePhoneNumber}
+                fullWidth
+              />
               <DateValidator
                 margin="normal"
                 required
@@ -101,13 +118,8 @@ class Register extends React.Component {
                 id="date"
                 name="date"
                 LabelText="Birthday"
-                validations={{
-                  myCustomIsFiveValidation: function(values, value) {
-                    values; // Other current values in form {foo: 'bar', 'number': 5}
-                    value; // 5
-                    return 5 === value ? true : "No five"; // You can return an error
-                  }
-                }}
+                setDate={this.OnBirthDateChange}
+                validations="IsOlderThan18"
                 validationError="You should be atleast 18 years old to register"
               />
               <FormControl margin="normal" required fullWidth>
