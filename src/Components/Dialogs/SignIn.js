@@ -11,13 +11,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { basestyles } from "../Styles/base";
 import { Login, Register, ForgotPassword } from "../Forms";
 import SignInFooter from "../Layouts/SignInFooter";
-
-const TextData = {
-  SignUpFooterLabel: "Don't have an account?",
-  RegisterFooterLabel: "Already have an account?",
-  SignUpButtonLabel: "Sign up",
-  LoginButtonLabel: "Log in"
-};
+import TextData from "../Data/stringresources";
 
 class SignIn extends React.Component {
   constructor(props) {

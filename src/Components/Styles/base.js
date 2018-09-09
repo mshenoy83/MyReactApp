@@ -63,11 +63,10 @@ export const basestyles = theme => ({
       backgroundColor: "rgba(78, 203, 244, 0.2)"
     }
   },
-  spacedText: {
-    marginRight: theme.spacing.unit
+  topMargin: {
+    marginTop: theme.spacing.unit
   },
-  dateField: {
-    marginLeft: theme.spacing.unit,
+  spacedText: {
     marginRight: theme.spacing.unit
   },
   halfWidth: {
