@@ -25,10 +25,6 @@ class SignIn extends React.Component {
     this.setState({
       open: this.props.IsOpen
     });
-    this.FooterButtonClick = this.FooterButtonClick.bind(this);
-    this.CloseDialog = this.CloseDialog.bind(this);
-    this.ForgotPasswordClick = this.ForgotPasswordClick.bind(this);
-    this.BacktoLogin = this.BacktoLogin.bind(this);
   }
   state = {
     showLogin: true,
@@ -38,44 +34,23 @@ class SignIn extends React.Component {
     FooterButtonText: TextData.SignUpButtonLabel
   };
 
-  FooterButtonClick() {
-    if (this.state.showLogin) {
-      this.setState({
-        showLogin: false,
-        showRegistration: true,
-        FooterLabelText: TextData.RegisterFooterLabel,
-        FooterButtonText: TextData.LoginButtonLabel
-      });
-      return;
-    }
-    if (this.state.showRegistration) {
-      this.setState({
-        showLogin: true,
-        showRegistration: false,
-        FooterLabelText: TextData.SignUpFooterLabel,
-        FooterButtonText: TextData.SignUpButtonLabel
-      });
-      return;
-    }
-  }
-
-  ForgotPasswordClick() {
+  ForgotPasswordClick = () => {
     this.setState({
       showLogin: false,
       showRegistration: false,
       showForgotPassword: true
     });
-  }
+  };
 
-  BacktoLogin() {
+  BacktoLogin = () => {
     this.setState({
       showLogin: true,
       showRegistration: false,
       showForgotPassword: false
     });
-  }
+  };
 
-  CloseDialog() {
+  CloseDialog = () => {
     this.setState({
       showLogin: true,
       showRegistration: false,
@@ -84,9 +59,9 @@ class SignIn extends React.Component {
       FooterButtonText: TextData.SignUpButtonLabel
     });
     this.props.handleClose();
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <React.Fragment>
         <Dialog
@@ -119,7 +94,6 @@ class SignIn extends React.Component {
                   </Button>
                 </React.Fragment>
               ) : null}
-              {this.state.showRegistration ? <Register /> : null}
               {this.state.showForgotPassword ? (
                 <ForgotPassword BacktoLogin={this.BacktoLogin} />
               ) : null}
@@ -129,13 +103,13 @@ class SignIn extends React.Component {
             <SignInFooter
               FooterLabel={this.state.FooterLabelText}
               FooterButtonText={this.state.FooterButtonText}
-              OnButtonClick={this.FooterButtonClick}
+              OnButtonClick={this.props.FooterButtonClick}
             />
           ) : null}
         </Dialog>
       </React.Fragment>
     );
-  }
+  };
 }
 
 export default withStyles(basestyles)(SignIn);

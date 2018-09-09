@@ -9,7 +9,7 @@ import AccountIcon from "@material-ui/icons/AccountBoxOutlined";
 import { basestyles } from "../Styles/base";
 
 class MyAppBar extends React.Component {
-  render() {
+  render = () => {
     return (
       <div className={this.props.classes.root}>
         <AppBar position="static">
@@ -39,7 +39,7 @@ class MyAppBar extends React.Component {
         </AppBar>
       </div>
     );
-  }
+  };
 }
 
 export default withStyles(basestyles)(MyAppBar);

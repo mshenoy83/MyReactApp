@@ -6,21 +6,16 @@ import { basestyles } from "../Styles/base";
 import Formsy from "formsy-react";
 
 class ForgotPassword extends React.Component {
-  constructor() {
-    super();
-    this.updateEmail = this.updateEmail.bind(this);
-  }
-
   state = {
     email: ""
   };
 
-  updateEmail(newValue) {
+  updateEmail = newValue => {
     this.setState({
       email: newValue
     });
-  }
-  render() {
+  };
+  render = () => {
     return (
       <React.Fragment>
         <Typography variant="headline">Forgot your password?</Typography>
@@ -55,7 +50,7 @@ class ForgotPassword extends React.Component {
         </Button>
       </React.Fragment>
     );
-  }
+  };
 }
 
 export default withStyles(basestyles)(ForgotPassword);

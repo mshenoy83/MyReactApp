@@ -3,19 +3,18 @@ import { withFormsy } from "formsy-react";
 import { Input, FormControl, InputLabel, Typography } from "@material-ui/core";
 
 class InputFormValidator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.changeValue = this.changeValue.bind(this);
-  }
-  changeValue(event) {
+  changeValue = event => {
     // setValue() will set the value of the component, which in
     // turn will validate it and the rest of the form
     // Important: Don't skip this step. This pattern is required
     // for Formsy to work.
     this.props.setValue(event.currentTarget.value);
     this.props.setEmail(event.currentTarget.value);
-  }
-  render() {
+  };
+  IsNullOrEmpty = value => {
+    return !value || value === undefined || value === "" || value.length === 0;
+  };
+  render = () => {
     const {
       name,
       id,
@@ -27,7 +26,7 @@ class InputFormValidator extends React.Component {
     } = this.props;
     // An error message is returned only if the component is invalid
     const errorMessage = this.props.getErrorMessage();
-
+    const hasError = !this.IsNullOrEmpty(errorMessage);
     return (
       <FormControl
         margin="normal"
@@ -42,13 +41,14 @@ class InputFormValidator extends React.Component {
           name={name}
           autoComplete={autoComplete}
           autoFocus={autoFocus}
+          error={hasError}
         />
         <Typography style={{ color: "red" }} variant="caption">
           {errorMessage}
         </Typography>
       </FormControl>
     );
-  }
+  };
 }
 
 export default withFormsy(InputFormValidator);

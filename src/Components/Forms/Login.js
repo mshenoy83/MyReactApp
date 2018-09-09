@@ -18,11 +18,6 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.setState({ canSubmit: false });
-    this.disableButton = this.disableButton.bind(this);
-    this.enableButton = this.enableButton.bind(this);
-    this.submitForm = this.submitForm.bind(this);
-    this.updateEmail = this.updateEmail.bind(this);
-    this.updatePassword = this.updatePassword.bind(this);
   }
 
   state = {
@@ -30,30 +25,30 @@ class Login extends React.Component {
     email: "",
     password: ""
   };
-  disableButton() {
+  disableButton = () => {
     this.setState({ canSubmit: false });
-  }
+  };
 
-  enableButton() {
+  enableButton = () => {
     this.setState({ canSubmit: true });
-  }
+  };
 
-  updateEmail(newValue) {
+  updateEmail = newValue => {
     this.setState({ email: newValue });
-  }
-  updatePassword(event) {
+  };
+  updatePassword = event => {
     this.setState({ password: event.target.value });
-  }
+  };
 
-  submitForm() {
+  submitForm = () => {
     const model = {
       Username: this.state.email,
       Password: this.state.password
     };
     this.props.OnSubmit(model);
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <React.Fragment>
         <Avatar className={this.props.classes.avatar}>
@@ -100,7 +95,7 @@ class Login extends React.Component {
         </Formsy>
       </React.Fragment>
     );
-  }
+  };
 }
 
 export default withStyles(basestyles)(Login);

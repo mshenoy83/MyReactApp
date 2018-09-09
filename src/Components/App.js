@@ -1,22 +1,18 @@
 import React from "react";
 import { MyAppBar, Footer } from "./Layouts";
 import SignIn from "./Dialogs/SignIn";
+import Register from "./Forms/Register";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.openLogin = this.openLogin.bind(this);
-    this.CloseLogin = this.CloseLogin.bind(this);
-    this.Login = this.Login.bind(this);
-  }
   state = {
     open: false,
     email: "",
     password: "",
-    blocking: false
+    blocking: false,
+    showRegistration: false
   };
 
-  Login(model) {
+  Login = model => {
     fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
       body: JSON.stringify({
@@ -33,18 +29,23 @@ class App extends React.Component {
         console.log(json);
         this.CloseLogin();
       });
-  }
+  };
 
-  openLogin() {
+  openLogin = () => {
     if (!this.state.open) {
       this.setState({ open: true });
     }
-  }
+  };
 
-  CloseLogin() {
+  FooterButtonClick = () => {
+    this.CloseLogin();
+    this.setState({ showRegistration: true });
+  };
+
+  CloseLogin = () => {
     this.setState({ open: false });
-  }
-  render() {
+  };
+  render = () => {
     return (
       <React.Fragment>
         <MyAppBar OpenDialog={this.openLogin} />
@@ -54,10 +55,12 @@ class App extends React.Component {
           OnSubmit={this.Login}
           Email={this.state.email}
           Password={this.state.password}
+          FooterButtonClick={this.FooterButtonClick}
         />
+        {this.state.showRegistration ? <Register /> : null}
       </React.Fragment>
     );
-  }
+  };
 }
 
 export default App;

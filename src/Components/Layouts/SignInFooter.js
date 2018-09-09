@@ -4,7 +4,7 @@ import { Button, Typography } from "@material-ui/core";
 import { basestyles } from "../Styles/base";
 
 class SignInFooter extends React.Component {
-  render() {
+  render = () => {
     return (
       <div className={this.props.classes.dialogFooter}>
         <Typography variant="body1" className={this.props.classes.spacedText}>
@@ -21,7 +21,7 @@ class SignInFooter extends React.Component {
         </Button>
       </div>
     );
-  }
+  };
 }
 
 export default withStyles(basestyles)(SignInFooter);
