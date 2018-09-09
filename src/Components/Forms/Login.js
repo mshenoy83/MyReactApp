@@ -70,7 +70,7 @@ class Login extends React.Component {
             required
             fullWidth
             autoFocus
-            setEmail={this.updateEmail}
+            setInputValue={this.updateEmail}
           />
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>

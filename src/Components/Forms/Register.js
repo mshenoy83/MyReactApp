@@ -4,7 +4,6 @@ import {
   Button,
   FormControl,
   Input,
-  TextField,
   InputLabel,
   Avatar,
   Typography,
@@ -51,6 +50,12 @@ class Register extends React.Component {
     this.setState({ DateOfBirth: value });
   };
 
+  updatePassword = newValue => {
+    this.setState({ Password: newValue });
+  };
+
+  Registration = () => {};
+
   render = () => {
     var Data = States,
       MakeItem = function(x) {
@@ -77,21 +82,27 @@ class Register extends React.Component {
                 id="email"
                 autoComplete="email"
                 LabelText="Email Address"
-                validations="isEmail"
-                validationError="This is not a valid email"
-                required
-                setEmail={this.updateEmail}
+                validations="isEmail,IsRequired"
+                validationErrors={{
+                  isEmail: "This is not a valid email",
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updateEmail}
                 fullWidth
               />
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-              </FormControl>
+              <InputFormValidator
+                name="password"
+                id="password"
+                autoComplete="current-password"
+                LabelText="Password"
+                validations="IsRequired"
+                validationErrors={{
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updatePassword}
+                fullWidth
+              />
+
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="firstname">First Name</InputLabel>
                 <Input name="firstname" autoFocus id="firstname" />
@@ -105,22 +116,27 @@ class Register extends React.Component {
                 id="mobilenumber"
                 autoComplete="mobilenumber"
                 LabelText="Mobile Number"
-                validations="IsValidPhoneNumber"
-                validationError="This is not a valid mobile number"
-                required
-                setEmail={this.updatePhoneNumber}
+                validations="IsValidPhoneNumber,IsRequired"
+                validationErrors={{
+                  IsValidPhoneNumber: "This is not a valid mobile number",
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updatePhoneNumber}
                 fullWidth
               />
               <DateValidator
                 margin="normal"
-                required
                 fullWidth
                 id="date"
                 name="date"
                 LabelText="Birthday"
                 setDate={this.OnBirthDateChange}
-                validations="IsOlderThan18"
-                validationError="You should be atleast 18 years old to register"
+                validations="IsOlderThan18,IsRequired"
+                validationErrors={{
+                  IsOlderThan18:
+                    "You should be atleast 18 years old to register",
+                  IsRequired: "This is a required field"
+                }}
               />
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="address1">Address Line1</InputLabel>
@@ -137,6 +153,7 @@ class Register extends React.Component {
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="State">State</InputLabel>
                 <Select
+                  required
                   onChange={this.handleSelectChange}
                   value={this.state.AddressState}
                 >
@@ -146,6 +163,17 @@ class Register extends React.Component {
                   {Data.map(MakeItem)}
                 </Select>
               </FormControl>
+              <Button
+                type="submit"
+                fullWidth
+                variant="raised"
+                color="primary"
+                className={this.props.classes.submit}
+                OnClick={this.Registration}
+                formNoValidate
+              >
+                Register and Continue
+              </Button>
             </Formsy>
           </Paper>
         </main>

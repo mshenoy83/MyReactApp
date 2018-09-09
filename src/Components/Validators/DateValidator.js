@@ -13,15 +13,7 @@ class DateValidator extends React.Component {
   };
 
   render = () => {
-    const {
-      name,
-      id,
-      autoComplete,
-      LabelText,
-      className,
-      fullWidth,
-      autoFocus
-    } = this.props;
+    const { name, id, LabelText, className, fullWidth } = this.props;
     // An error message is returned only if the component is invalid
     const errorMessage = this.props.getErrorMessage();
     return (

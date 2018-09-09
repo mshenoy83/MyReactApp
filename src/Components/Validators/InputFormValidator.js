@@ -9,8 +9,9 @@ class InputFormValidator extends React.Component {
     // Important: Don't skip this step. This pattern is required
     // for Formsy to work.
     this.props.setValue(event.currentTarget.value);
-    this.props.setEmail(event.currentTarget.value);
+    this.props.setInputValue(event.currentTarget.value);
   };
+
   IsNullOrEmpty = value => {
     return !value || value === undefined || value === "" || value.length === 0;
   };
