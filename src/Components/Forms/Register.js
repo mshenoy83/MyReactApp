@@ -15,7 +15,6 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import { basestyles } from "../Styles/base";
 import InputFormValidator from "../Validators/InputFormValidator";
-import DateValidator from "../Validators/DateValidator";
 import AddIcon from "@material-ui/icons/AddCircleOutlined";
 import classnames from "classnames";
 import States from "../Data/states";
@@ -102,15 +101,28 @@ class Register extends React.Component {
                 setInputValue={this.updatePassword}
                 fullWidth
               />
-
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="firstname">First Name</InputLabel>
-                <Input name="firstname" autoFocus id="firstname" />
-              </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="lastname">Last Name</InputLabel>
-                <Input name="lastname" id="lastname" />
-              </FormControl>
+              <InputFormValidator
+                name="firstname"
+                id="firstname"
+                LabelText="First Name"
+                validations="IsRequired"
+                validationErrors={{
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updateFirstName}
+                fullWidth
+              />
+              <InputFormValidator
+                name="lastname"
+                id="lastname"
+                LabelText="Last Name"
+                validations="IsRequired"
+                validationErrors={{
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updateLastName}
+                fullWidth
+              />
               <InputFormValidator
                 name="mobilenumber"
                 id="mobilenumber"
@@ -124,13 +136,14 @@ class Register extends React.Component {
                 setInputValue={this.updatePhoneNumber}
                 fullWidth
               />
-              <DateValidator
+              <InputFormValidator
+                type="date"
                 margin="normal"
                 fullWidth
                 id="date"
                 name="date"
                 LabelText="Birthday"
-                setDate={this.OnBirthDateChange}
+                setInputValue={this.OnBirthDateChange}
                 validations="IsOlderThan18,IsRequired"
                 validationErrors={{
                   IsOlderThan18:
@@ -138,18 +151,36 @@ class Register extends React.Component {
                   IsRequired: "This is a required field"
                 }}
               />
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="address1">Address Line1</InputLabel>
-                <Input name="address1" id="address1" />
-              </FormControl>
+              <InputFormValidator
+                name="address1"
+                id="address1"
+                LabelText="Address Line1"
+                validations="IsRequired"
+                validationErrors={{
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updateAddressLine1}
+                fullWidth
+              />
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="address2">Address Line2</InputLabel>
-                <Input name="address2" id="address2" />
+                <Input
+                  name="address2"
+                  id="address2"
+                  OnChange={this.updateAddressLine2}
+                />
               </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="suburb">Suburb</InputLabel>
-                <Input name="suburb" id="suburb" />
-              </FormControl>
+              <InputFormValidator
+                name="suburb"
+                id="suburb"
+                LabelText="Suburb"
+                validations="IsRequired"
+                validationErrors={{
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updateAddressLine1}
+                fullWidth
+              />
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="State">State</InputLabel>
                 <Select

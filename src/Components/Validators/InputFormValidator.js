@@ -1,6 +1,12 @@
 import React from "react";
 import { withFormsy } from "formsy-react";
-import { Input, FormControl, InputLabel, Typography } from "@material-ui/core";
+import {
+  Input,
+  FormControl,
+  InputLabel,
+  Typography,
+  TextField
+} from "@material-ui/core";
 
 class InputFormValidator extends React.Component {
   changeValue = event => {
@@ -23,7 +29,8 @@ class InputFormValidator extends React.Component {
       LabelText,
       className,
       fullWidth,
-      autoFocus
+      autoFocus,
+      type
     } = this.props;
     // An error message is returned only if the component is invalid
     const errorMessage = this.props.getErrorMessage();
@@ -35,15 +42,32 @@ class InputFormValidator extends React.Component {
         className={className}
         fullWidth={fullWidth}
       >
-        <InputLabel htmlFor={name}>{LabelText}</InputLabel>
-        <Input
-          onChange={this.changeValue}
-          id={id}
-          name={name}
-          autoComplete={autoComplete}
-          autoFocus={autoFocus}
-          error={hasError}
-        />
+        {this.props.type === "date" ? (
+          <TextField
+            id={id}
+            onChange={this.changeValue}
+            name={name}
+            label={LabelText}
+            type="date"
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        ) : (
+          <React.Fragment>
+            <InputLabel htmlFor={name}>{LabelText}</InputLabel>
+            <Input
+              onChange={this.changeValue}
+              id={id}
+              name={name}
+              autoComplete={autoComplete}
+              autoFocus={autoFocus}
+              error={hasError}
+              type={type}
+            />
+          </React.Fragment>
+        )}
+
         <Typography style={{ color: "red" }} variant="caption">
           {errorMessage}
         </Typography>
