@@ -28,32 +28,24 @@ class Register extends React.Component {
     Password: "",
     FirstName: "",
     FamilyName: "",
+    MobileNumber: "",
     Address1: "",
     Address2: "",
     AddressSuburb: "",
     AddressState: "",
     AddressPCode: "",
-    DateOfBirth: ""
-  };
-  handleSelectChange = event => {
-    this.setState({
-      AddressState: event.target.value
-    });
+    DateOfBirth: "",
+    TriggerValidation: false
   };
 
-  updatePhoneNumber = newValue => {
-    this.setState({ PhoneNumber: newValue });
+  updateInput = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
-  OnBirthDateChange = value => {
-    this.setState({ DateOfBirth: value });
+  Registration = event => {
+    event.preventDefault();
+    this.setState({ TriggerValidation: true });
   };
-
-  updatePassword = newValue => {
-    this.setState({ Password: newValue });
-  };
-
-  Registration = () => {};
 
   render = () => {
     var Data = States,
@@ -77,7 +69,7 @@ class Register extends React.Component {
             <Typography variant="headline">Sign up</Typography>
             <Formsy>
               <InputFormValidator
-                name="email"
+                name="UserName"
                 id="email"
                 autoComplete="email"
                 LabelText="Email Address"
@@ -86,11 +78,12 @@ class Register extends React.Component {
                   isEmail: "This is not a valid email",
                   IsRequired: "This is a required field"
                 }}
-                setInputValue={this.updateEmail}
+                setInputValue={this.updateInput}
                 fullWidth
+                IsInitialised={this.state.TriggerValidation}
               />
               <InputFormValidator
-                name="password"
+                name="Password"
                 id="password"
                 autoComplete="current-password"
                 LabelText="Password"
@@ -98,33 +91,36 @@ class Register extends React.Component {
                 validationErrors={{
                   IsRequired: "This is a required field"
                 }}
-                setInputValue={this.updatePassword}
+                setInputValue={this.updateInput}
                 fullWidth
+                IsInitialised={this.state.TriggerValidation}
               />
               <InputFormValidator
-                name="firstname"
+                name="FirstName"
                 id="firstname"
                 LabelText="First Name"
                 validations="IsRequired"
                 validationErrors={{
                   IsRequired: "This is a required field"
                 }}
-                setInputValue={this.updateFirstName}
+                setInputValue={this.updateInput}
                 fullWidth
+                IsInitialised={this.state.TriggerValidation}
               />
               <InputFormValidator
-                name="lastname"
+                name="FamilyName"
                 id="lastname"
                 LabelText="Last Name"
                 validations="IsRequired"
                 validationErrors={{
                   IsRequired: "This is a required field"
                 }}
-                setInputValue={this.updateLastName}
+                setInputValue={this.updateInput}
                 fullWidth
+                IsInitialised={this.state.TriggerValidation}
               />
               <InputFormValidator
-                name="mobilenumber"
+                name="MobileNumber"
                 id="mobilenumber"
                 autoComplete="mobilenumber"
                 LabelText="Mobile Number"
@@ -133,74 +129,80 @@ class Register extends React.Component {
                   IsValidPhoneNumber: "This is not a valid mobile number",
                   IsRequired: "This is a required field"
                 }}
-                setInputValue={this.updatePhoneNumber}
+                setInputValue={this.updateInput}
                 fullWidth
+                IsInitialised={this.state.TriggerValidation}
               />
               <InputFormValidator
                 type="date"
                 margin="normal"
                 fullWidth
                 id="date"
-                name="date"
+                name="DateOfBirth"
                 LabelText="Birthday"
-                setInputValue={this.OnBirthDateChange}
+                setInputValue={this.updateInput}
                 validations="IsOlderThan18,IsRequired"
                 validationErrors={{
                   IsOlderThan18:
                     "You should be atleast 18 years old to register",
                   IsRequired: "This is a required field"
                 }}
+                IsInitialised={this.state.TriggerValidation}
               />
               <InputFormValidator
-                name="address1"
+                name="Address1"
                 id="address1"
                 LabelText="Address Line1"
                 validations="IsRequired"
                 validationErrors={{
                   IsRequired: "This is a required field"
                 }}
-                setInputValue={this.updateAddressLine1}
+                setInputValue={this.updateInput}
                 fullWidth
+                IsInitialised={this.state.TriggerValidation}
               />
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="address2">Address Line2</InputLabel>
                 <Input
-                  name="address2"
+                  name="Address2"
                   id="address2"
-                  OnChange={this.updateAddressLine2}
+                  OnChange={this.updateInput}
                 />
               </FormControl>
               <InputFormValidator
-                name="suburb"
+                name="AddressSuburb"
                 id="suburb"
                 LabelText="Suburb"
                 validations="IsRequired"
                 validationErrors={{
                   IsRequired: "This is a required field"
                 }}
-                setInputValue={this.updateAddressLine1}
+                setInputValue={this.updateInput}
                 fullWidth
+                IsInitialised={this.state.TriggerValidation}
               />
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="State">State</InputLabel>
-                <Select
-                  required
-                  onChange={this.handleSelectChange}
-                  value={this.state.AddressState}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {Data.map(MakeItem)}
-                </Select>
-              </FormControl>
+              <InputFormValidator
+                name="AddressState"
+                id="state"
+                type="select"
+                LabelText="State"
+                validations="IsRequired"
+                validationErrors={{
+                  IsRequired: "This is a required field"
+                }}
+                setInputValue={this.updateInput}
+                value={this.state.AddressState}
+                fullWidth
+                IsInitialised={this.state.TriggerValidation}
+                MenuItemMap={Data.map(MakeItem)}
+              />
               <Button
                 type="submit"
                 fullWidth
                 variant="raised"
                 color="primary"
                 className={this.props.classes.submit}
-                OnClick={this.Registration}
+                onClick={this.Registration}
                 formNoValidate
               >
                 Register and Continue

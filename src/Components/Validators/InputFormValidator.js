@@ -5,7 +5,9 @@ import {
   FormControl,
   InputLabel,
   Typography,
-  TextField
+  TextField,
+  Select,
+  MenuItem
 } from "@material-ui/core";
 
 class InputFormValidator extends React.Component {
@@ -14,46 +16,66 @@ class InputFormValidator extends React.Component {
     // turn will validate it and the rest of the form
     // Important: Don't skip this step. This pattern is required
     // for Formsy to work.
+    this.setState({ Initialised: true });
     this.props.setValue(event.currentTarget.value);
-    this.props.setInputValue(event.currentTarget.value);
+    this.props.setInputValue(event);
+  };
+
+  state = {
+    Initialised: false
   };
 
   IsNullOrEmpty = value => {
     return !value || value === undefined || value === "" || value.length === 0;
   };
-  render = () => {
+
+  renderSwitch = (param, hasError) => {
     const {
       name,
       id,
       autoComplete,
       LabelText,
-      className,
-      fullWidth,
       autoFocus,
-      type
+      type,
+      MenuItemMap,
+      value
     } = this.props;
-    // An error message is returned only if the component is invalid
-    const errorMessage = this.props.getErrorMessage();
-    const hasError = !this.IsNullOrEmpty(errorMessage);
-    return (
-      <FormControl
-        margin="normal"
-        required
-        className={className}
-        fullWidth={fullWidth}
-      >
-        {this.props.type === "date" ? (
+
+    switch (param) {
+      case "date":
+        return (
           <TextField
             id={id}
             onChange={this.changeValue}
             name={name}
             label={LabelText}
             type="date"
+            error={hasError}
             InputLabelProps={{
               shrink: true
             }}
           />
-        ) : (
+        );
+      case "select":
+        return (
+          <React.Fragment>
+            <InputLabel htmlFor="State">State</InputLabel>
+            <Select
+              onChange={this.changeValue}
+              id={id}
+              name={name}
+              error={hasError}
+              value={value}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {MenuItemMap}
+            </Select>
+          </React.Fragment>
+        );
+      default:
+        return (
           <React.Fragment>
             <InputLabel htmlFor={name}>{LabelText}</InputLabel>
             <Input
@@ -66,11 +88,30 @@ class InputFormValidator extends React.Component {
               type={type}
             />
           </React.Fragment>
-        )}
+        );
+    }
+  };
 
-        <Typography style={{ color: "red" }} variant="caption">
-          {errorMessage}
-        </Typography>
+  render = () => {
+    const { className, fullWidth } = this.props;
+    // An error message is returned only if the component is invalid
+    const errorMessage = this.props.getErrorMessage();
+    const hasError =
+      !this.IsNullOrEmpty(errorMessage) &&
+      (this.state.Initialised || this.props.IsInitialised);
+    return (
+      <FormControl
+        margin="normal"
+        required
+        className={className}
+        fullWidth={fullWidth}
+      >
+        {this.renderSwitch(this.props.type, hasError)}
+        {this.state.Initialised || this.props.IsInitialised ? (
+          <Typography style={{ color: "red" }} variant="caption">
+            {errorMessage}
+          </Typography>
+        ) : null}
       </FormControl>
     );
   };

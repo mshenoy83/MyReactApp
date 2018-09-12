@@ -33,11 +33,8 @@ class Login extends React.Component {
     this.setState({ canSubmit: true });
   };
 
-  updateEmail = newValue => {
-    this.setState({ email: newValue });
-  };
-  updatePassword = event => {
-    this.setState({ password: event.target.value });
+  updateInput = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   submitForm = () => {
@@ -70,7 +67,7 @@ class Login extends React.Component {
             required
             fullWidth
             autoFocus
-            setInputValue={this.updateEmail}
+            setInputValue={this.updateInput}
           />
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
@@ -79,7 +76,7 @@ class Login extends React.Component {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={this.updatePassword}
+              onChange={this.updateInput}
             />
           </FormControl>
           <Button
