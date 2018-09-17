@@ -38,7 +38,8 @@ class InputFormValidator extends React.Component {
       autoFocus,
       type,
       MenuItemMap,
-      value
+      value,
+      dataArray
     } = this.props;
 
     switch (param) {
@@ -57,6 +58,10 @@ class InputFormValidator extends React.Component {
           />
         );
       case "select":
+        var Data = dataArray,
+          MakeItem = function(x) {
+            return <MenuItem value={x.id}>{x.Name}</MenuItem>;
+          };
         return (
           <React.Fragment>
             <InputLabel htmlFor="State">State</InputLabel>
@@ -70,7 +75,7 @@ class InputFormValidator extends React.Component {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {MenuItemMap}
+              {Data.map(MakeItem)}
             </Select>
           </React.Fragment>
         );

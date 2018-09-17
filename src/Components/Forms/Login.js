@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { basestyles } from "../Styles/base";
 import InputFormValidator from "../Validators/InputFormValidator";
 import LockIcon from "@material-ui/icons/LockOutlined";
-import classnames from "classnames";
+import baserules from "../ValidationRules/BaseRules";
 import {
   Button,
   FormControl,

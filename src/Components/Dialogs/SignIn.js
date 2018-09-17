@@ -9,17 +9,11 @@ import {
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { basestyles } from "../Styles/base";
-import { Login, Register, ForgotPassword } from "../Forms";
+import { Login, ForgotPassword } from "../Forms";
 import SignInFooter from "../Layouts/SignInFooter";
 import TextData from "../Data/stringresources";
 
 class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.setState({
-      open: this.props.IsOpen
-    });
-  }
   state = {
     showLogin: true,
     showRegistration: false,

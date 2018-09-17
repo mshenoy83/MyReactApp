@@ -8,9 +8,7 @@ import {
   Avatar,
   Typography,
   Paper,
-  CssBaseline,
-  Select,
-  MenuItem
+  CssBaseline
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { basestyles } from "../Styles/base";
@@ -48,11 +46,6 @@ class Register extends React.Component {
   };
 
   render = () => {
-    var Data = States,
-      MakeItem = function(x) {
-        return <MenuItem value={x.id}>{x.Name}</MenuItem>;
-      };
-
     return (
       <React.Fragment>
         <CssBaseline />
@@ -194,7 +187,7 @@ class Register extends React.Component {
                 value={this.state.AddressState}
                 fullWidth
                 IsInitialised={this.state.TriggerValidation}
-                MenuItemMap={Data.map(MakeItem)}
+                dataArray={States}
               />
               <Button
                 type="submit"
